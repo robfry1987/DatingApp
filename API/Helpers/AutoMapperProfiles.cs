@@ -3,7 +3,6 @@ using API.Entities;
 using API.Extensions;
 using AutoMapper;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 
 namespace API.Helpers
 {
@@ -17,6 +16,7 @@ namespace API.Helpers
                 .ForMember(dest => dest.Age, opt => opt.MapFrom(src =>
                     src.DateOfBirth.CalculateAge()));
             CreateMap<Photo, PhotoDto>();
+            CreateMap<MemberUpdateDto, AppUser>();
         }
     }
 }
