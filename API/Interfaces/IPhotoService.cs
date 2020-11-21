@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace API.Interfaces
 {
-    interface IPhotoService
+    public interface IPhotoService
     {
         Task<ImageUploadResult> AddPhotoAsync(IFormFile file);
 
