@@ -10,9 +10,10 @@ import { MessageService } from '../_services/message.service';
   styleUrls: ['./messages.component.css']
 })
 export class MessagesComponent implements OnInit {
-  messages: Message[];
+  messages: Message[] = [];
   pagination: Pagination;
   messageParams: MessageParams;
+  loading = false;
 
   constructor(private messageService: MessageService) {
     this.messageParams = this.messageService.getMessageParams();
@@ -23,10 +24,18 @@ export class MessagesComponent implements OnInit {
   }
 
   loadMessages() {
+    this.loading = true;
     this.messageService.setMessageParams(this.messageParams);
     this.messageService.getMessages(this.messageParams).subscribe(response => {
       this.messages = response.result;
       this.pagination = response.pagination;
+      this.loading = false;
+    })
+  }
+
+  deleteMessage(id: number) {
+    this.messageService.deleteMessage(id).subscribe(() => {
+      this.messages.splice(this.messages.findIndex(m => m.id === id), 1);
     })
   }
 
