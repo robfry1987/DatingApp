@@ -6,6 +6,7 @@ import { Member } from '../../_models/member';
 import { Message } from '../../_models/message';
 import { MembersService } from '../../_services/members.service';
 import { MessageService } from '../../_services/message.service';
+import { PresenceService } from '../../_services/presence.service';
 
 @Component({
   selector: 'app-member-detail',
@@ -20,7 +21,7 @@ export class MemberDetailComponent implements OnInit {
   galleryImages: NgxGalleryImage[];
   messages: Message[] = [];
 
-  constructor(private membersService: MembersService, private route: ActivatedRoute,
+  constructor(public presenceService: PresenceService, private route: ActivatedRoute,
     private messageService: MessageService) { }
 
   ngOnInit(): void {
