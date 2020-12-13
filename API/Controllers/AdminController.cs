@@ -74,10 +74,10 @@ namespace API.Controllers
             photo.IsApproved = true;
             var user = await _unitOfWork.UserRepository.GetUserByPhotoIdAsync(photo.Id);
             var photos = user.Photos.Where(p => p.IsMain);
-            if(!photos.Any())
-            {
+            if (!photos.Any())
                 photo.IsMain = true;
-            }
+            else
+                photo.IsMain = false;
             if (await _unitOfWork.Complete()) return NoContent();
 
             return BadRequest("Failed to approve photo");

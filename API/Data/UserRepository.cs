@@ -102,7 +102,9 @@ namespace API.Data
                 .IgnoreQueryFilters()
                 .Where(photo => photo.Id == photoId);
             var userId = photos.FirstOrDefault().AppUserId;
-            return await _context.Users.FindAsync(userId);
+            return await _context.Users
+                .Include(p => p.Photos)
+                .SingleOrDefaultAsync(x => x.Id == userId);
         }
     }
 }
